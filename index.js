@@ -1,47 +1,75 @@
 const inquirer = require('inquirer');
 const fs = require(`fs`)
 const markdown = require("./utils/generateMarkdown")
+                            
 
-var response = [
+const response = [
     {
-        type: 'input ',
+        type: 'input',
         message: 'What is the title of your project?',
         name: 'title',
     },
     {
-        type: 'input ',
+        type: 'input',
         message: 'Give a brief description of your project.(What was your motivation?)',
         name: 'description',
     },
+
     {
-        type: 'input ',
-        message: 'What is the title of your project?',
-        name: 'username',
+        type: 'list',
+        message: 'Which license did you use for your project?',
+        name: 'license',
+        choices: ["MIT","GPL","Apache", ""]
+       
     },
     {
-        type: 'confirm',
-        message: 'Do you want a table of contents',
-        name: "username",
+        type: 'input',
+        message: 'What are some steps required to install your project?',
+        name: 'installation',
     },
     {
-        type: 'password',
-        message: 'What is your password?',
-        name: 'password',
+        type: 'input',
+        message: 'List your collaborators, if any, with links to their GitHub profiles.',
+        name: 'collaboration',
+        default: "n/a",
+    },
+
+    {
+        type: 'input',
+        message: 'List all languages',
+        name: 'languages',
     },
     {
-        type: 'password',
-        message: 'Re-enter password to confirm:',
-        name: 'confirm',
+        type: 'list',
+        message: 'What frameworks did you use?',
+        name: 'frameworks',
+        choices: ["Visual Studio Code","Nodepad++","UltraEdit", ""]
     },
+    {
+        type: 'input',
+        message: 'Developers Name:',
+        name: 'developer',
+    },
+    {
+        type: 'input',
+        message: "Github Username:",
+        name: 'gitHub',
+    },
+    {
+        type: 'input',
+        message: "Email:",
+        name: 'email',
+    },
+
 ]
 
 inquirer.prompt(response).then(function (answers) {
 // console.log(answers)
-    fs.writeFile("Ferd.md", markdown(answers), (err) => {
+    fs.writeFile("ReadMe.md", markdown(answers), (err) => {
         if (err) throw err;
         console.log('The file has been saved!');
     });
- 
+
 });
 
 
